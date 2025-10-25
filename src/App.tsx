@@ -1,18 +1,20 @@
-import { useState } from 'react'
+import type {PublicClientApplication} from "@azure/msal-browser";
+import {MsalProvider} from "@azure/msal-react";
+import {SnackbarProvider} from "./hooks/contexts/snackbar-provider.tsx";
+import {UserProvider} from "./hooks/contexts/user-provider.tsx";
+import Router from './routes/routes';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function App({instance}: {
+  instance: PublicClientApplication
+}) {
   return (
-    <>
-      <div>
-123
-
-
-      </div>
-
-
-    </>
+    <MsalProvider instance={instance}>
+      <SnackbarProvider>
+        <UserProvider>
+          <Router/>
+        </UserProvider>
+      </SnackbarProvider>
+    </MsalProvider>
   )
 }
 
