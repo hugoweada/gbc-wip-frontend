@@ -7,13 +7,20 @@ import PrimaryButton from '../../components/buttons/primary-button';
 import SecondaryButton from '../../components/buttons/secondary-button';
 import PrimaryBox from '../../components/layout/primary-box';
 import RowStack from '../../components/layout/row-stack';
+import Word from "../../components/text/word.tsx";
+import useLoginMicrosoft from "../../hooks/auth/use-login-microsoft.ts";
+import useLogout from "../../hooks/auth/use-logout.ts";
+import {useUserContext} from "../../hooks/contexts/user-context.ts";
 import {useRouter} from "../../hooks/routes/use-router.ts";
 import useAuth from '../../pages/auth/use-auth';
 import {paths} from '../../routes/paths';
 
 export default function FrontPageNavbar() {
   const router = useRouter();
+  const {username} = useUserContext()
   const {isAccessTokenExist} = useAuth();
+  const {onLogin} = useLoginMicrosoft()
+  const {onLogout} = useLogout()
 
   return (
     <PrimaryBox
@@ -70,13 +77,14 @@ export default function FrontPageNavbar() {
       <RowStack spacing={1} alignY="center">
         {isAccessTokenExist ? (
           <>
-            <SecondaryButton onClick={() => router.push(paths.login)} variant="plain">
+            <Word>{username}</Word>
+            <SecondaryButton onClick={onLogout} variant="plain">
               Logout
             </SecondaryButton>
           </>
         ) : (
           <RowStack>
-            <SecondaryButton onClick={() => router.push(paths.login)} variant="plain">
+            <SecondaryButton onClick={onLogin} variant="plain">
               Log in
             </SecondaryButton>
           </RowStack>

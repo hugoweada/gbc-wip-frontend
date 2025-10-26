@@ -1,3 +1,4 @@
+import type {UserLoginSuccessInfo} from "../../interfaces/userLoginSuccessInfo.ts";
 import {paths} from '../../routes/paths';
 import {useUserContext} from '../contexts/user-context';
 import {useRouter} from '../routes/use-router';
@@ -8,16 +9,15 @@ const useLoginSave = () => {
   const {setUserContext} = useUserContext();
   const {onSetAccessToken, onSetRefreshToken, onSetRefreshTokenExpiry} = useAuthTokens();
 
-  return async (userInfo: any) => {
+  return async (userInfo: UserLoginSuccessInfo) => {
     setUserContext({
       userId: userInfo.userId,
       username: userInfo.userName,
-      userRole: userInfo.userRole,
     });
     await Promise.all([
       onSetAccessToken(userInfo.accessToken),
       onSetRefreshToken(userInfo.refreshToken),
-      onSetRefreshTokenExpiry(userInfo.refreshTokenExpiry),
+      onSetRefreshTokenExpiry(''),
     ]);
 
     if (userInfo.accessToken.length > 0) {

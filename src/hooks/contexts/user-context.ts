@@ -3,8 +3,6 @@ import {createContext, useContext} from 'react';
 export interface UserContextProps {
   userId?: string;
   username?: string;
-  userRole?: string;
-  profileImageUri?: string;
   setUserContext: (data: Partial<UserContextProps>) => void;
 }
 
