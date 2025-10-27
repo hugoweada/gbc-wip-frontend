@@ -1,23 +1,26 @@
-import {testApi} from "../api/app/test.ts";
 import PrimaryButton from "../components/buttons/primary-button.tsx";
+import ColumnStack from "../components/layout/column-stack.tsx";
 import PrimaryBox from "../components/layout/primary-box.tsx";
-import Word from "../components/text/word.tsx";
-import useRequest from "../hooks/api/use-request.ts";
-import useString from "../hooks/primitive/use-string.ts";
+import PrimaryUploadSingle from "../components/upload/primary-upload-single.tsx";
+import useUploadBlob from "../hooks/blobs/use-upload-blob.ts";
 
 const FrontPage = () => {
-  const {onRequest} = useRequest();
-  const testResult = useString('')
-  const onTest = async () => {
-  const response =  await onRequest(testApi.test, [], null, true)
-    testResult.onChangeValue(JSON.stringify(response.result))
-  }
+  const {file, onUpload} = useUploadBlob();
+
   return (
     <PrimaryBox sx={{height: '100vh'}}>
-      <PrimaryButton onClick={onTest}>Test</PrimaryButton>
-      <Word>{testResult.value}</Word>
+      <PrimaryBox sx={{width: '50vw'}}>
+        <ColumnStack>
+          <PrimaryUploadSingle
+            value={file.value}
+            onChangeValue={file.onChangeValue}
+            onClear={() => file.onChangeValue(null)}
+          />
+          <PrimaryButton onClick={onUpload}>Upload File</PrimaryButton>
+        </ColumnStack>
+      </PrimaryBox>
     </PrimaryBox>
   )
 }
 
-export default FrontPage
+export default FrontPage;
