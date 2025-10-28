@@ -10,7 +10,11 @@ const useUploadBlob = () => {
     if (file.value == null) return;
 
     try {
-      const response = await onRequest(blobApi.getUploadUri, [], null, false);
+      const body = {
+        fileName: file.value.name,
+        fileType: file.value.type,
+      }
+      const response = await onRequest(blobApi.getUploadUri, [], body, false);
       if (!response.result) {
         console.error("No upload URI received from the server.");
         return;
