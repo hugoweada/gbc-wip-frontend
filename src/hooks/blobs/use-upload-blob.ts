@@ -35,6 +35,7 @@ const useUploadBlob = () => {
       }
 
       console.log("File uploaded successfully.");
+      file.onChangeValue(null);
     } catch (error) {
       console.error("Error uploading file:", error);
     }
