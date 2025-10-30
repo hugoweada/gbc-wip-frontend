@@ -14,16 +14,29 @@ interface PrimaryUploadSingleProps {
 }
 
 const PrimaryUploadSingle: React.FC<PrimaryUploadSingleProps> = ({
-  value,
-  onChangeValue,
-  onClear,
-}) => {
+                                                                   value,
+                                                                   onChangeValue,
+                                                                   onClear,
+                                                                 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const uploadedFile = e.target.files[0];
       onChangeValue(uploadedFile);
+
+      // Reset the file input value to allow re-selection of the same file
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
+  const handleClear = () => {
+    // Clear the file and reset the input value
+    onClear();
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''; // Reset file input value
     }
   };
 
@@ -55,7 +68,7 @@ const PrimaryUploadSingle: React.FC<PrimaryUploadSingleProps> = ({
             <Word color="green">{value.name}</Word>
             <img src={URL.createObjectURL(value)} style={{ width: '32px', height: '100%' }} />
           </RowStack>
-          <IconButton color="danger" onClick={onClear}>
+          <IconButton color="danger" onClick={handleClear}>
             <DeleteIcon />
           </IconButton>
         </RowStack>
