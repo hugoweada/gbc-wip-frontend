@@ -2,7 +2,7 @@ import {blobApi} from "../../api/file/blob.ts";
 import useRequest from "../api/use-request.ts";
 import useObject from "../primitive/use-object.ts";
 
-const useUploadBlob = () => {
+const useUploadBlob = (callback: () => Promise<void>) => {
   const {onRequest, isLoading} = useRequest<string>();
   const file = useObject<File>(null);
 
@@ -36,6 +36,8 @@ const useUploadBlob = () => {
 
       console.log("File uploaded successfully.");
       file.onChangeValue(null);
+
+      await callback();
     } catch (error) {
       console.error("Error uploading file:", error);
     }

@@ -6,6 +6,7 @@ export interface FileMetadata {
   lastUpdatedAt: string;
   fileName: string;
   fileType: string;
+  isPublic: boolean;
   size: number;
   status: FileStatus;
   userId: string;

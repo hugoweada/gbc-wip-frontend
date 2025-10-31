@@ -1,5 +1,5 @@
-import {ApiRequest} from '../../api/request-instance';
-import useObjectAsync, {Callback, UseObjectAsyncReturn} from './base/use-object-async';
+import type {ApiRequest} from '../../api/request-instance';
+import useObjectAsync, {type Callback, type UseObjectAsyncReturn} from './base/use-object-async';
 import useInit from './use-init';
 
 const useInitObject = <T extends object | any[]>(

@@ -1,6 +1,6 @@
 import {useCallback} from 'react';
-import {ApiRequest} from '../../../api/request-instance';
-import useObject, {UseObjectReturn} from '../../primitive/use-object';
+import type {ApiRequest} from '../../../api/request-instance';
+import useObject, {type UseObjectReturn} from '../../primitive/use-object';
 import useRequest from '../use-request';
 
 export type Callback<T> = (result: T | null) => void;
