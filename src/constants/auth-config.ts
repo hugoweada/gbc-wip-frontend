@@ -8,8 +8,8 @@ import {LogLevel} from '@azure/msal-browser';
 
 export const msalConfig = {
   auth: {
-    clientId: '9f72533a-f47a-4d01-9aec-ef919bdcdde2', // This is the ONLY mandatory field that you need to supply.
-    authority: 'https://login.microsoftonline.com/e3f4cc11-49a6-409a-a5d0-259539f53af6', // Replace the placeholder with your tenant info
+    clientId: '2e447a3c-310a-4ac5-9278-5e5294a8e190', // This is the ONLY mandatory field that you need to supply.
+    authority: 'https://login.microsoftonline.com/4417d707-bcf3-4a41-8135-13d1a205b864', // Replace the placeholder with your tenant info
     redirectUri: import.meta.env['VITE_MSAL_REDIRECT_URI'], // Points to window.location.origin. You must register this URI on Microsoft Entra admin center/App Registration.
     postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
     navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
@@ -52,7 +52,7 @@ export const msalConfig = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-  scopes: ["openid", "profile", 'api://9f72533a-f47a-4d01-9aec-ef919bdcdde2/User.Access'],
+  scopes: ["openid", "profile", 'api://2e447a3c-310a-4ac5-9278-5e5294a8e190/User.Access'],
 };
 
 /**
